@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FlickrAppAppDelegate : UIResponder <UIApplicationDelegate>
+@interface FlickrAppAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
