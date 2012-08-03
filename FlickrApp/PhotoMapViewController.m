@@ -9,7 +9,7 @@
 #import "PhotoMapViewController.h"
 #import "FlickrFetcher.h"
 #import "FlickrPhotoAnnotation.h"
-#import "FlickrAppPhotoViewController.h"
+#import "PhotoViewController.h"
 
 @interface PhotoMapViewController () <MKMapViewDelegate>
 

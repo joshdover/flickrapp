@@ -128,7 +128,7 @@
 - (void)displayDetailInformationForAnnotation:(id<MKAnnotation>)annotation
 {
     FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
-    [(FlickrAppPhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers lastObject] topViewController] updatePhoto:fpa.photo withTitle:[self titleForPhoto:fpa.photo]];
+    [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers lastObject] topViewController] updatePhoto:fpa.photo withTitle:[self titleForPhoto:fpa.photo]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -237,7 +237,7 @@
      */
     [self savePhotoToRecents:[self.photos objectAtIndex:indexPath.row]];
 
-    [(FlickrAppPhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers objectAtIndex:1] topViewController] updatePhoto:[self.photos objectAtIndex:[self.tableView indexPathForSelectedRow].row] withTitle:[self titleForPhoto:[self.photos objectAtIndex:[self.tableView indexPathForSelectedRow].row]]];
+    [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers objectAtIndex:1] topViewController] updatePhoto:[self.photos objectAtIndex:[self.tableView indexPathForSelectedRow].row] withTitle:[self titleForPhoto:[self.photos objectAtIndex:[self.tableView indexPathForSelectedRow].row]]];
 }
 
 @end

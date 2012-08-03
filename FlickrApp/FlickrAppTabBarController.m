@@ -7,7 +7,7 @@
 //
 
 #import "FlickrAppTabBarController.h"
-#import "FlickrAppRecentPhotoTableViewController.h"
+#import "RecentPhotoTableViewController.h"
 
 @implementation FlickrAppTabBarController
 
@@ -25,10 +25,10 @@
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     if (tabBarController.selectedIndex == 1) {
-        if (![(FlickrAppRecentPhotoTableViewController*)[(UINavigationController*)viewController topViewController] isKindOfClass:[FlickrAppRecentPhotoTableViewController class]]) {
+        if (![(RecentPhotoTableViewController*)[(UINavigationController*)viewController topViewController] isKindOfClass:[RecentPhotoTableViewController class]]) {
             [(UINavigationController*)viewController popToRootViewControllerAnimated:NO];
         }
-        [(FlickrAppRecentPhotoTableViewController*)[(UINavigationController*)viewController topViewController] reloadRecentPhotos];
+        [(RecentPhotoTableViewController*)[(UINavigationController*)viewController topViewController] reloadRecentPhotos];
     }
 }
 

@@ -162,7 +162,7 @@
      */
     
     
-    [(FlickrAppPhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers objectAtIndex:1] topViewController] updatePhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row] withTitle:[self titleForPhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row]]];
+    [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers objectAtIndex:1] topViewController] updatePhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row] withTitle:[self titleForPhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row]]];
 }
 
 @end
