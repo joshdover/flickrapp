@@ -21,10 +21,10 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="acc-Vv-2bb">
                                         <rect key="frame" x="0.0" y="2" width="768" height="1113"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -261,7 +261,15 @@
                             <outlet property="delegate" destination="tGB-Gy-Apb" id="xDw-ge-O1v"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recent Photos" id="Tfp-bK-tMc"/>
+                    <navigationItem key="navigationItem" title="Recent Photos" id="Tfp-bK-tMc">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="aK2-di-8eU">
+                            <connections>
+                                <segue destination="Re9-e7-8jd" kind="popover" identifier="Show Map from Recents" popoverAnchorBarButtonItem="aK2-di-8eU" id="145-0d-9Pf">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                 </tableViewController>
             </objects>
@@ -322,6 +330,44 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1924" y="-2291"/>
+        </scene>
+        <!--Photo Map View Controller-->
+        <scene sceneID="dG1-uj-GTo">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="umW-y8-tEs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Re9-e7-8jd" customClass="PhotoMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3wZ-IV-l7J">
+                        <rect key="frame" x="0.0" y="20" width="320" height="783"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="2tX-X1-xGB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="783"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="5kX-gt-BzX">
+                                <rect key="frame" x="57" y="727" width="207" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <segments>
+                                    <segment title="Map"/>
+                                    <segment title="Earth"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <connections>
+                                    <action selector="mapTypeChanged:" destination="Re9-e7-8jd" eventType="valueChanged" id="9Rs-EM-LTl"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="i5t-EJ-b1z"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="500" height="800"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <connections>
+                        <outlet property="mapView" destination="2tX-X1-xGB" id="I1O-d8-1wH"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1592" y="-1299"/>
         </scene>
     </scenes>
     <classes>

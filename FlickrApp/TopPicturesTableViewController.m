@@ -224,6 +224,8 @@
     dispatch_release(saveToDefaults);
 }
 
+
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -235,6 +237,7 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
     [self savePhotoToRecents:[self.photos objectAtIndex:indexPath.row]];
 
     [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers objectAtIndex:1] topViewController] updatePhoto:[self.photos objectAtIndex:[self.tableView indexPathForSelectedRow].row] withTitle:[self titleForPhoto:[self.photos objectAtIndex:[self.tableView indexPathForSelectedRow].row]]];

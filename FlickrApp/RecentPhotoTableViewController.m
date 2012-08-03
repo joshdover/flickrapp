@@ -9,8 +9,10 @@
 #import "RecentPhotoTableViewController.h"
 #import "PhotoViewController.h"
 #import "FlickrFetcher.h"
+#import "PhotoMapViewController.h"
+#import "FlickrPhotoAnnotation.h"
 
-@interface RecentPhotoTableViewController ()
+@interface RecentPhotoTableViewController () <MapViewControllerDelegate>
 
 @end
 
@@ -75,12 +77,40 @@
     return [photo objectForKey:FLICKR_PHOTO_OWNER];
 }
 
+- (NSArray *)mapAnnotations
+{
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:[self.recentPhotos count]];
+    for (NSDictionary *photo in self.recentPhotos) {
+        [annotations addObject:[FlickrPhotoAnnotation annotationForPhoto:photo]];
+    }
+    return annotations;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Recent Photo"]) {                       
         [segue.destinationViewController setPhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row]];
         [segue.destinationViewController setTitle:[self titleForPhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row]]]; 
+    } else if ([segue.identifier isEqualToString:@"Show Map from Recents"]) {
+        [segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setAnnotations:[self mapAnnotations]];
     }
+}
+
+#pragma mark - MapViewControllerDelegate
+
+- (UIImage *)mapViewController:(PhotoMapViewController *)sender imageForAnnotation:(id <MKAnnotation>)annotation
+{
+    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+    NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
+- (void)displayDetailInformationForAnnotation:(id<MKAnnotation>)annotation
+{
+    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+    [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers lastObject] topViewController] updatePhoto:fpa.photo withTitle:[self titleForPhoto:fpa.photo]];
 }
 
 #pragma mark - Table view data source

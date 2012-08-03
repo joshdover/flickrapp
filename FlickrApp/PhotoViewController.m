@@ -8,6 +8,7 @@
 
 #import "PhotoViewController.h"
 #import "FlickrFetcher.h"
+#import "PhotoCacher.h"
 
 @interface PhotoViewController () <UIScrollViewDelegate>
 
@@ -34,7 +35,7 @@
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    
+        
     dispatch_queue_t downloadQueue = dispatch_queue_create("download queue", NULL);
     dispatch_async(downloadQueue, ^{
         if (self.photo == nil) {
@@ -44,7 +45,8 @@
                 self.title = [self.photo objectForKey:FLICKR_PHOTO_TITLE];
             }
         }
-        UIImage *newImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
+        UIImage *newImage = [UIImage imageWithData:[PhotoCacher getPhoto:self.photo withFormat:FlickrPhotoFormatLarge]];
+        // UIImage *newImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imageView.image = newImage;
             self.scrollView.contentSize = self.imageView.image.size;

@@ -69,10 +69,12 @@
     self.title = [self.place objectForKey:FLICKR_PLACE_NAME];
     
     // setup the center of the map
-    CLLocationCoordinate2D centerCoordinate;
-    centerCoordinate.latitude = [[self.place objectForKey:FLICKR_LATITUDE] doubleValue];
-    centerCoordinate.longitude = [[self.place objectForKey:FLICKR_LONGITUDE] doubleValue];
-    [self.mapView setRegion:MKCoordinateRegionMake(centerCoordinate, MKCoordinateSpanMake(.2, .2))];
+    if (self.place != nil) {
+        CLLocationCoordinate2D centerCoordinate;
+        centerCoordinate.latitude = [[self.place objectForKey:FLICKR_LATITUDE] doubleValue];
+        centerCoordinate.longitude = [[self.place objectForKey:FLICKR_LONGITUDE] doubleValue];
+        [self.mapView setRegion:MKCoordinateRegionMake(centerCoordinate, MKCoordinateSpanMake(.2, .2))];
+    }
 }
 
 - (void)setPlace:(NSDictionary *)place
