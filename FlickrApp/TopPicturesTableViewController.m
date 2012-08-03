@@ -94,7 +94,7 @@
     } else if (![description isEqualToString:@""]) {
         result = description;
     } else {
-        result = @"Unknown";
+        result = @"(blank)";
     }
     
     return result;
@@ -127,8 +127,13 @@
 
 - (void)displayDetailInformationForAnnotation:(id<MKAnnotation>)annotation
 {
-    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
-    [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers lastObject] topViewController] updatePhoto:fpa.photo withTitle:[self titleForPhoto:fpa.photo]];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+        [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers lastObject] topViewController] updatePhoto:fpa.photo withTitle:[self titleForPhoto:fpa.photo]];
+    } else {
+        [self performSegueWithIdentifier:@"Show Photo from Map" sender:annotation];
+    }
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -140,6 +145,10 @@
         [segue.destinationViewController setDelegate:self];
         [segue.destinationViewController setPlace:self.place];
         [segue.destinationViewController setAnnotations:[self mapAnnotations]];
+    } else if ([segue.identifier isEqualToString:@"Show Photo from Map"]) {
+        FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)sender;
+        [segue.destinationViewController setPhoto:fpa.photo];
+        [segue.destinationViewController setTitle:[self titleForPhoto:fpa.photo]];
     }
 }
 

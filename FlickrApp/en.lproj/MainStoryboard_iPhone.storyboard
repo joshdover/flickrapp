@@ -111,6 +111,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="HjA-W3-VIC" kind="push" identifier="Show Photo from Map" id="OGR-tB-7JG"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1614" y="-138"/>
@@ -196,6 +199,7 @@
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.15568074792825434" green="0.74450152853260865" blue="0.19635371252642519" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="upg-PT-UGf" kind="relationship" relationship="viewControllers" id="26"/>
@@ -256,6 +260,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Gc7-B9-8a9" kind="push" identifier="Show Recent Photo from Map" id="4Q9-k7-asN"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1124" y="483"/>
@@ -370,7 +377,103 @@
             </objects>
             <point key="canvasLocation" x="1630" y="1071"/>
         </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="9MB-s2-22G">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RP5-Gj-CBG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Gc7-B9-8a9" customClass="PhotoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="go7-Zy-aNb">
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.25" maximumZoomScale="3" id="bud-8D-I5z">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="PCj-XK-KzT">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="m4I-YN-E2D"/>
+                    <connections>
+                        <outlet property="imageView" destination="PCj-XK-KzT" id="u8o-U3-7hE"/>
+                        <outlet property="scrollView" destination="bud-8D-I5z" id="wL4-k1-L5E"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2068" y="1071"/>
+        </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="y7Y-RU-1Vk">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PDl-MO-UQX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="HjA-W3-VIC" customClass="PhotoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jeu-vu-ZUE">
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.25" maximumZoomScale="3" id="pPB-YM-DQ4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="rLZ-ep-6m4">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SCp-vc-awo"/>
+                    <connections>
+                        <outlet property="imageView" destination="rLZ-ep-6m4" id="rXA-13-hKU"/>
+                        <outlet property="scrollView" destination="pPB-YM-DQ4" id="pI9-8U-1Cs"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1614" y="-811"/>
+        </scene>
     </scenes>
+    <classes>
+        <class className="FlickrAppTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrAppTabBarController.h"/>
+        </class>
+        <class className="PhotoMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoMapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="mapTypeChanged:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="mapTypeSelector:"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="PhotoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="RecentPhotoTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotoTableViewController.h"/>
+        </class>
+        <class className="TopPicturesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPicturesTableViewController.h"/>
+        </class>
+        <class className="TopPlacesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refresh:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

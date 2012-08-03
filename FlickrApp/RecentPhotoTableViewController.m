@@ -66,7 +66,7 @@
     } else if (![description isEqualToString:@""]) {
         result = description;
     } else {
-        result = @"Unknown";
+        result = @"(blank)";
     }
     
     return result;
@@ -88,12 +88,16 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"Show Recent Photo"]) {                       
+    if ([segue.identifier isEqualToString:@"Show Recent Photo"]) {
         [segue.destinationViewController setPhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row]];
         [segue.destinationViewController setTitle:[self titleForPhoto:[self.recentPhotos objectAtIndex:[self.tableView indexPathForSelectedRow].row]]]; 
     } else if ([segue.identifier isEqualToString:@"Show Map from Recents"]) {
         [segue.destinationViewController setDelegate:self];
         [segue.destinationViewController setAnnotations:[self mapAnnotations]];
+    } else if ([segue.identifier isEqualToString:@"Show Recent Photo from Map"]) {
+        FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)sender;
+        [segue.destinationViewController setPhoto:fpa.photo];
+        [segue.destinationViewController setTitle:[self titleForPhoto:fpa.photo]];
     }
 }
 
@@ -109,8 +113,13 @@
 
 - (void)displayDetailInformationForAnnotation:(id<MKAnnotation>)annotation
 {
-    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
-    [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers lastObject] topViewController] updatePhoto:fpa.photo withTitle:[self titleForPhoto:fpa.photo]];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+        [(PhotoViewController *)[(UINavigationController *)[self.splitViewController.viewControllers lastObject] topViewController] updatePhoto:fpa.photo withTitle:[self titleForPhoto:fpa.photo]];
+    } else {
+        [self performSegueWithIdentifier:@"Show Recent Photo from Map" sender:annotation];
+    }
+    
 }
 
 #pragma mark - Table view data source

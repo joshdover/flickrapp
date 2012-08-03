@@ -117,7 +117,6 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);
     [self.delegate displayDetailInformationForAnnotation:view.annotation];
 }
 
