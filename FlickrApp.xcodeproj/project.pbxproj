@@ -28,7 +28,6 @@
 		B92AAA7C15BD1E3F00E8EC98 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B92AAA7B15BD1E3F00E8EC98 /* MainStoryboard_iPad.storyboard */; };
 		B9CEE54615BE250A0099CCEC /* RecentPhotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE54515BE250A0099CCEC /* RecentPhotoTableViewController.m */; };
 		B9CEE54D15BE5D850099CCEC /* FlickrAppTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE54C15BE5D850099CCEC /* FlickrAppTabBarController.m */; };
-		B9F7352515BF7A5600C6288C /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9F7352415BF7A5600C6288C /* iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +66,6 @@
 		B9CEE54B15BE5D850099CCEC /* FlickrAppTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAppTabBarController.h; sourceTree = "<group>"; };
 		B9CEE54C15BE5D850099CCEC /* FlickrAppTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrAppTabBarController.m; sourceTree = "<group>"; };
 		B9E3E55615C1D58A00D248E6 /* SplitViewControllerButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewControllerButtonItemPresenter.h; sourceTree = "<group>"; };
-		B9F7352415BF7A5600C6288C /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +122,6 @@
 				B9CEE54B15BE5D850099CCEC /* FlickrAppTabBarController.h */,
 				B9CEE54C15BE5D850099CCEC /* FlickrAppTabBarController.m */,
 				B92AAA7B15BD1E3F00E8EC98 /* MainStoryboard_iPad.storyboard */,
-				B9F7352415BF7A5600C6288C /* iPad.storyboard */,
 				B92AAA7015BD116000E8EC98 /* PhotoViewController.h */,
 				B92AAA7115BD116000E8EC98 /* PhotoViewController.m */,
 				B9CEE54415BE250A0099CCEC /* RecentPhotoTableViewController.h */,
@@ -217,7 +214,6 @@
 				B909C13715B9E8500052F8DA /* second.png in Resources */,
 				B909C13915B9E8500052F8DA /* second@2x.png in Resources */,
 				B92AAA7C15BD1E3F00E8EC98 /* MainStoryboard_iPad.storyboard in Resources */,
-				B9F7352515BF7A5600C6288C /* iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
