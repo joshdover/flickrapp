@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FlickrAppPhotoViewController.h"
+#import "PhotoViewController.h"
 #import "FlickrFetcher.h"
 
-@interface FlickrAppPhotoViewController () <UIScrollViewDelegate>
+@interface PhotoViewController () <UIScrollViewDelegate>
 
 @end
 
-@implementation FlickrAppPhotoViewController
+@implementation PhotoViewController
 
 @synthesize scrollView;
 @synthesize imageView;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FlickrAppRecentPhotoTableViewController : UITableViewController
+@interface RecentPhotoTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSArray *recentPhotos;
 

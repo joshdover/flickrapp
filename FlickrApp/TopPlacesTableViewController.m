@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FlickrAppTopPlacesViewController.h"
+#import "TopPlacesTableViewController.h"
 #import "FlickrFetcher.h"
-#import "FlickrAppTopPicturesTableViewController.h"
+#import "TopPicturesTableViewController.h"
 
-@interface FlickrAppTopPlacesViewController ()
+@interface TopPlacesTableViewController ()
 
 @end
 
-@implementation FlickrAppTopPlacesViewController
+@implementation TopPlacesTableViewController
 
 @synthesize places = _places;
 

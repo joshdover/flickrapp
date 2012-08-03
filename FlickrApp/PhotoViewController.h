@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SplitViewControllerButtonItemPresenter.h"
 
-@interface FlickrAppPhotoViewController : UIViewController <UISplitViewControllerDelegate, SplitViewBarButtonItemPresenter>
+@interface PhotoViewController : UIViewController <UISplitViewControllerDelegate, SplitViewBarButtonItemPresenter>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

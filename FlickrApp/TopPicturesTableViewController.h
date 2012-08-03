@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FlickrAppTopPicturesTableViewController : UITableViewController
+@interface TopPicturesTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSDictionary *place;
 @property (nonatomic, strong) NSArray *photos;

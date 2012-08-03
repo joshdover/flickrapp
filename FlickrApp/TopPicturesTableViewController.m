@@ -6,19 +6,19 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FlickrAppTopPicturesTableViewController.h"
+#import "TopPicturesTableViewController.h"
 #import "FlickrFetcher.h"
-#import "FlickrAppPhotoViewController.h"
+#import "PhotoViewController.h"
 #import "FlickrPhotoAnnotation.h"
 #import "PhotoMapViewController.h"
 
 #define MAX_PHOTOS 50
 
-@interface FlickrAppTopPicturesTableViewController () <MapViewControllerDelegate>
+@interface TopPicturesTableViewController () <MapViewControllerDelegate>
 
 @end
 
-@implementation FlickrAppTopPicturesTableViewController
+@implementation TopPicturesTableViewController
 
 @synthesize place = _place;
 @synthesize photos = _photos;

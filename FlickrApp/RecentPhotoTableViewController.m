@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FlickrAppRecentPhotoTableViewController.h"
-#import "FlickrAppPhotoViewController.h"
+#import "RecentPhotoTableViewController.h"
+#import "PhotoViewController.h"
 #import "FlickrFetcher.h"
 
-@interface FlickrAppRecentPhotoTableViewController ()
+@interface RecentPhotoTableViewController ()
 
 @end
 
-@implementation FlickrAppRecentPhotoTableViewController
+@implementation RecentPhotoTableViewController
 
 @synthesize recentPhotos = _recentPhotos;
 
