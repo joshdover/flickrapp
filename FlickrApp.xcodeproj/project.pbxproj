@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		931F696215CDAA3D006AB938 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 931F696115CDAA3D006AB938 /* nav.png */; };
 		93406B7715CB7B6E006A6774 /* PhotoCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 93406B7615CB7B6E006A6774 /* PhotoCacher.m */; };
 		93C2935915C3747600D58F67 /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C2935815C3747600D58F67 /* PhotoMapViewController.m */; };
 		93C2935C15C376E300D58F67 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C2935B15C376E300D58F67 /* MapKit.framework */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		931F696115CDAA3D006AB938 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		93406B7515CB7B6E006A6774 /* PhotoCacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCacher.h; sourceTree = SOURCE_ROOT; };
 		93406B7615CB7B6E006A6774 /* PhotoCacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCacher.m; sourceTree = SOURCE_ROOT; };
 		93C2935715C3747600D58F67 /* PhotoMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoMapViewController.h; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				B909C12F15B9E8500052F8DA /* first.png */,
 				B909C13115B9E8500052F8DA /* first@2x.png */,
 				B909C13615B9E8500052F8DA /* second.png */,
+				931F696115CDAA3D006AB938 /* nav.png */,
 				B909C13815B9E8500052F8DA /* second@2x.png */,
 				B909C11B15B9E8500052F8DA /* Supporting Files */,
 			);
@@ -219,6 +222,7 @@
 				B909C13715B9E8500052F8DA /* second.png in Resources */,
 				B909C13915B9E8500052F8DA /* second@2x.png in Resources */,
 				B92AAA7C15BD1E3F00E8EC98 /* MainStoryboard_iPad.storyboard in Resources */,
+				931F696215CDAA3D006AB938 /* nav.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

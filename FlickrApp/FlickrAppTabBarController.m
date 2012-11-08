@@ -13,7 +13,11 @@
 
 - (void)viewDidLoad
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];    
+    for (UINavigationController *nav in self.viewControllers) {
+        [[nav navigationBar] setBackgroundImage:[UIImage imageNamed:@"nav.png"] forBarMetrics:UIBarMetricsDefault];
+    }
+
     self.delegate = self;
 }
 

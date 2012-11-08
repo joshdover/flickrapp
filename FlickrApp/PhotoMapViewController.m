@@ -18,11 +18,14 @@
 @implementation PhotoMapViewController
 
 #pragma mark - Synchronize Model and View
+@synthesize spinner;
 
 - (void)updateMapView
 {
+    [self.spinner startAnimating];
     if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
     if (self.annotations) [self.mapView addAnnotations:self.annotations];
+    // [self.spinner stopAnimating];
 }
 
 - (void)setMapView:(MKMapView *)mapView
@@ -126,12 +129,14 @@
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
+    // self.spinner.hidesWhenStopped = YES;
     [self updatePlace];
 }
 
 - (void)viewDidUnload
 {
     [self setMapView:nil];
+    [self setSpinner:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

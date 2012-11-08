@@ -11,6 +11,7 @@
 #import "FlickrFetcher.h"
 #import "PhotoMapViewController.h"
 #import "FlickrPhotoAnnotation.h"
+#import "PhotoCacher.h"
 
 @interface RecentPhotoTableViewController () <MapViewControllerDelegate>
 
@@ -135,9 +136,26 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    NSDictionary *photoForCell = [self.recentPhotos objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [self titleForPhoto:[self.recentPhotos objectAtIndex:indexPath.row]];
-    cell.detailTextLabel.text = [self descriptionForPhoto:[self.recentPhotos objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [self titleForPhoto:photoForCell];
+    cell.detailTextLabel.text = [self descriptionForPhoto:photoForCell];
+    
+    dispatch_queue_t downloadThumbnail = dispatch_queue_create("get photo data", NULL);
+    dispatch_async(downloadThumbnail, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.imageView.image = nil;
+        });
+        NSData *thumbnail = nil;
+        if (photoForCell != nil) {
+            thumbnail = [PhotoCacher getPhoto:photoForCell withFormat:FlickrPhotoFormatSquare];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.imageView.image = [UIImage imageWithData:thumbnail];
+                [cell setNeedsLayout];
+            });
+        }
+    });
+    dispatch_release(downloadThumbnail);
     
     return cell;
 }

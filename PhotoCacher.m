@@ -13,7 +13,7 @@
 
 #pragma mark - Cache management
 
-+ (NSURL *)cacheDirectory
++ (NSURL *)cacheDirectoryForFormat:(FlickrPhotoFormat)format
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *dirPath = nil;
@@ -22,6 +22,7 @@
     NSArray *appSupportDir = [fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
     if ([appSupportDir count] > 0) {
         dirPath = [[appSupportDir objectAtIndex:0] URLByAppendingPathComponent:@"FlickrCache"];
+        dirPath = [dirPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%u", format]];
         [fm createDirectoryAtURL:dirPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
@@ -30,7 +31,7 @@
 
 + (NSURL *)URLForPhoto:(NSDictionary *)photo withFormat:(FlickrPhotoFormat)format
 {
-    return [[self cacheDirectory] URLByAppendingPathComponent:[[[photo objectForKey:FLICKR_PHOTO_ID] stringByAppendingFormat:@"_%u", format] stringByAppendingString:@".jpg"]];
+    return [[self cacheDirectoryForFormat:format] URLByAppendingPathComponent:[[[photo objectForKey:FLICKR_PHOTO_ID] stringByAppendingFormat:@"_%u", format] stringByAppendingString:@".jpg"]];
 }
 
 + (NSData *)savePhotoToCache:(NSDictionary *)photo withFormat:(FlickrPhotoFormat)format
@@ -39,38 +40,38 @@
     
     NSData *newPhoto = [NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:photo format:format]];
     [newPhoto writeToURL:photoURL atomically:NO];
-    
-    [self cleanupCache];
+
+    [self cleanupCacheForFormat:format];
     
     return newPhoto;
 }
 
-+ (int)folderSize
++ (int)folderSizeForFormat:(FlickrPhotoFormat)format
 {
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSDirectoryEnumerator *filesEnumerator = [manager enumeratorAtPath:[[self cacheDirectory] path]];
+    NSDirectoryEnumerator *filesEnumerator = [manager enumeratorAtPath:[[self cacheDirectoryForFormat:format] path]];
     NSString *fileName;
     unsigned long long int fileSize = 0;
     
     while (fileName = [filesEnumerator nextObject]) {
-        NSDictionary *fileDictionary = [manager attributesOfItemAtPath:[[[self cacheDirectory] path] stringByAppendingPathComponent:fileName] error:nil];
+        NSDictionary *fileDictionary = [manager attributesOfItemAtPath:[[[self cacheDirectoryForFormat:format] path] stringByAppendingPathComponent:fileName] error:nil];
         fileSize += [fileDictionary fileSize];
     }
     
     return fileSize;
 }
 
-+ (void)deleteOldestPhoto
++ (void)deleteOldestPhotoForFormat:(FlickrPhotoFormat)format
 {
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSDirectoryEnumerator *filesEnumerator = [manager enumeratorAtPath:[[self cacheDirectory] path]];
+    NSDirectoryEnumerator *filesEnumerator = [manager enumeratorAtPath:[[self cacheDirectoryForFormat:format] path]];
     NSString *currentFileName;
     NSString *oldestFileName;
     NSDate *currentDate;
     NSDate *oldestDate;
     
     while (currentFileName = [filesEnumerator nextObject]) {
-        NSDictionary *fileDictionary = [manager attributesOfItemAtPath:[[[self cacheDirectory] path] stringByAppendingPathComponent:currentFileName] error:nil];
+        NSDictionary *fileDictionary = [manager attributesOfItemAtPath:[[[self cacheDirectoryForFormat:format] path] stringByAppendingPathComponent:currentFileName] error:nil];
         currentDate = [fileDictionary objectForKey:NSFileCreationDate];
         if ([[currentDate earlierDate:oldestDate] isEqualToDate:currentDate]) {
             oldestDate = currentDate;
@@ -79,15 +80,15 @@
     }
     
 //    NSLog(@"Removing: %@", oldestFileName);
-    [manager removeItemAtPath:[[[self cacheDirectory] path] stringByAppendingPathComponent:oldestFileName] error:nil];
+    [manager removeItemAtPath:[[[self cacheDirectoryForFormat:format] path] stringByAppendingPathComponent:oldestFileName] error:nil];
 }
 
-+ (void)cleanupCache
++ (void)cleanupCacheForFormat:(FlickrPhotoFormat)format
 {
-    int folderSize = [self folderSize];
+    int folderSize = [self folderSizeForFormat:format];
     while (folderSize > 10485760) {
-        [self deleteOldestPhoto];
-        folderSize = [self folderSize];
+        [self deleteOldestPhotoForFormat:format];
+        folderSize = [self folderSizeForFormat:format];
     }
     
 //    NSLog(@"File Size: %i", folderSize);

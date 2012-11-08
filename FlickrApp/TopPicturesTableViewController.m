@@ -11,6 +11,7 @@
 #import "PhotoViewController.h"
 #import "FlickrPhotoAnnotation.h"
 #import "PhotoMapViewController.h"
+#import "PhotoCacher.h"
 
 #define MAX_PHOTOS 50
 
@@ -37,7 +38,8 @@
     dispatch_async(getPhotoData, ^{
         self.photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_PHOTOS];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
+            // [self.tableView reloadData];
+            [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
             self.navigationItem.rightBarButtonItem = mapButton;
         });
     });
@@ -120,8 +122,7 @@
 {
     FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
     [self savePhotoToRecents:fpa.photo];
-    NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSData *data = [PhotoCacher getPhoto:fpa.photo withFormat:FlickrPhotoFormatSquare];
     return data ? [UIImage imageWithData:data] : nil;
 }
 
@@ -165,9 +166,26 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    NSDictionary *photoForCell = [self.photos objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [self titleForPhoto:[self.photos objectAtIndex:indexPath.row]];
-    cell.detailTextLabel.text = [self descriptionForPhoto:[self.photos objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [self titleForPhoto:photoForCell];
+    cell.detailTextLabel.text = [self descriptionForPhoto:photoForCell];
+    
+    dispatch_queue_t downloadThumbnail = dispatch_queue_create("get photo data", NULL);
+    dispatch_async(downloadThumbnail, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.imageView.image = nil;
+        });
+        NSData *thumbnail = nil;
+        if (photoForCell != nil) {
+            thumbnail = [PhotoCacher getPhoto:photoForCell withFormat:FlickrPhotoFormatSquare];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.imageView.image = [UIImage imageWithData:thumbnail];
+                [cell setNeedsLayout];
+            });
+        }
+    });
+    dispatch_release(downloadThumbnail);
     
     // cell.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:[self.photos objectAtIndex:indexPath.row] format:FlickrPhotoFormatSquare]]];
     

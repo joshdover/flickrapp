@@ -17,6 +17,7 @@
 @end
 
 @interface PhotoMapViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSDictionary *place;
 @property (strong, nonatomic) NSArray *annotations; // of <MKAnnotation>
